@@ -14,19 +14,19 @@ namespace ToDo
             do
             {
                 menuSelected = ShowMainMenu();
-                if (Menu) menuSelected == Menu.Add)
+                if ((Menu)menuSelected == Menu.Add)
                 {
                     ShowMenuAdd();
                 }
-                else if (menuSelected == Menu.Remove)
+                else if ((Menu)menuSelected == Menu.Remove)
                 {
                     ShowMenuRemove();
                 }
-                else if (menuSelected == Menu.List)
+                else if ((Menu)menuSelected == Menu.List)
                 {
                     ShowMenuTaskList();
                 }
-            } while (menuSelected != Menu.Exit;
+            } while ((Menu)menuSelected != Menu.Exit);
         }
         /// <summary>
         /// Show the main menu 
@@ -52,19 +52,18 @@ namespace ToDo
             {
                 Console.WriteLine("Ingrese el número de la tarea a remover: ");
                 // Show current taks
-                ListTask();
+                ListTaks();
 
                 string opcion = Console.ReadLine();
                 // Remove one position
                 int indexToRemove = Convert.ToInt32(opcion) - 1;
-                if (indexToRemove > -1)
+                if (indexToRemove > -1 && TaskList.Count > 0)
                 {
-                    if (TaskList.Count > 0)
-                    {
-                        string taskDeleted = TaskList[indexToRemove];
-                        TaskList.RemoveAt(indexToRemove);
-                        Console.WriteLine("Tarea " + taskDeleted + " eliminada");
-                    }
+
+                    string taskDeleted = TaskList[indexToRemove];
+                    TaskList.RemoveAt(indexToRemove);
+                    Console.WriteLine("Tarea " + taskDeleted + " eliminada");
+
                 }
             }
             catch (Exception)
@@ -88,16 +87,10 @@ namespace ToDo
 
         public static void ShowMenuTaskList()
         {
-            ListTask();
+            ListTaks();
         }
-        public enum Menu
-        {
-            Add = 1,
-            Remove = 2,
-            List = 3,
-            Exit = 4
-        }
-        public static void ListTask()
+
+        public static void ListTaks()
         {
             if (TaskList == null || TaskList.Count == 0)
             {
@@ -106,14 +99,20 @@ namespace ToDo
             else
             {
                 Console.WriteLine("----------------------------------------");
-                for (int i = 0; i < TaskList.Count; i++)
-                {
-                    Console.WriteLine((i + 1) + ". " + TaskList[i]);
-                }
+                TaskList.ForEach(p => Console.WriteLine($"{TaskList.IndexOf(p) + 1} - {p}"));
+
                 Console.WriteLine("----------------------------------------");
             }
         }
-
     }
+    public enum Menu
+    {
+        Add = 1,
+        Remove = 2,
+        List = 3,
+        Exit = 4
+    }
+
+
 
 }
