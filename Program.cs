@@ -5,25 +5,25 @@ public static List<string> TaskList = new List<string>();
 
 
 int menuSelected = 0;
-        do
-        {
-            menuSelected = ShowMainMenu();
-            if ((Menu) menuSelected == Menu.Add)
-            {
-                ShowMenuAdd();
-            }
-            else if ((Menu)menuSelected == Menu.Remove)
+do
 {
-    ShowMenuRemove();
-}
-else if ((Menu)menuSelected == Menu.List)
-{
-    ShowMenuTaskList();
-}
-        } while ((Menu)menuSelected != Menu.Exit) ;
+    menuSelected = ShowMainMenu();
+    if ((Menu)menuSelected == Menu.Add)
+    {
+        ShowMenuAdd();
+    }
+    else if ((Menu)menuSelected == Menu.Remove)
+    {
+        ShowMenuRemove();
+    }
+    else if ((Menu)menuSelected == Menu.List)
+    {
+        ShowMenuTaskList();
+    }
+} while ((Menu)menuSelected != Menu.Exit);
 
 /// <summary>
-/// Show the main menu 
+/// Show the options for task
 /// </summary>
 /// <returns>Returns option indicated by user</returns>
 int ShowMainMenu()
@@ -35,7 +35,6 @@ int ShowMainMenu()
     Console.WriteLine("3. Tareas pendientes");
     Console.WriteLine("4. Salir");
 
-    // Read line
     string opcion = Console.ReadLine();
     return Convert.ToInt32(opcion);
 }
@@ -45,11 +44,9 @@ void ShowMenuRemove()
     try
     {
         Console.WriteLine("Ingrese el número de la tarea a remover: ");
-        // Show current taks
         ListTaks();
 
         string opcion = Console.ReadLine();
-        // Remove one position
         int indexToRemove = Convert.ToInt32(opcion) - 1;
         if (indexToRemove > -1 && TaskList.Count > 0)
         {
